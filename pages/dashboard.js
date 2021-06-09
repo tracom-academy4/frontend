@@ -33,11 +33,12 @@ export default class home extends React.Component {
             <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
           <div className="logo" />
+          
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item key="1" icon={<PieChartOutlined />}>
               Dashboard
             </Menu.Item>
-            
+
             <SubMenu key="sub1" icon={<UserOutlined />} title="User Management">             
               <Menu.Item key="2" icon={<UserAddOutlined />}>Add new user</Menu.Item>              
               <Menu.Item key="3" icon={<CloseOutlined />}>View users</Menu.Item>
