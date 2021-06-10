@@ -115,7 +115,7 @@ export default class home extends React.Component {
             </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
 
-              <div className={''}>
+              {/*<div className={''}>
 
                 <Row gutter={16}>
 
@@ -127,7 +127,7 @@ export default class home extends React.Component {
                     <Statistic title="In use" value={"YES"} precision={2} />
                     {/*<Button style={{ marginTop: 16 }} type="primary">
                  Recharge
-               </Button>*/}
+               </Button>*
                   </Col>
 
                   <Col span={12}>
@@ -140,6 +140,7 @@ export default class home extends React.Component {
 
                 </Row>,
             </div>
+            */}
 
               <div className="site-calendar-demo-card">
                 <Calendar fullscreen={false} onPanelChange={onPanelChange} />

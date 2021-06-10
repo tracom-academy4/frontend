@@ -22,7 +22,6 @@ export default function register() {
         setComponentSize(size);
     };
     return (
-
             <div>
                 <h2>Please fill the form below to complete action:</h2>
 

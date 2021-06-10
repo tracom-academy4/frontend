@@ -41,7 +41,6 @@ export default function createRoom() {
         <CustomLayout>
             <div>
                 <h2>Please fill the form below to complete action:</h2>
-
                 <>
                     <Form
                         labelCol={{
@@ -97,7 +96,6 @@ export default function createRoom() {
                         <Col span={18}>
                             <Button>Create Room</Button>
                         </Col>
-
             </div>
         </CustomLayout>
     )

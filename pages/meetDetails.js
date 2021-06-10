@@ -25,7 +25,6 @@ export default function meetDetails() {
 
         { key: 'meeting topic', label: 'Meeting topic', required: true },
 
-
     ]
     return (
         <CustomLayout>

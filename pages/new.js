@@ -15,18 +15,14 @@ import {
 } from 'antd';
 import CustomLayout from '../components/layout';
 
-
-
 export default function newUser() {
     const [componentSize, setComponentSize] = useState('default');
 
     const onFormLayoutChange = ({ size }) => {
         setComponentSize(size);
     };
-    return (
-
-        <CustomLayout>
-            
+    return (        
+        <CustomLayout>            
             <div>
                 <h2>Please fill the form below to complete action:</h2>
 
@@ -96,11 +92,9 @@ export default function newUser() {
                             <Button>Create user</Button>
                         </Form.Item>
 
-
-
                     </Form>
                 </>
-            </div>
+            </div>            
             <style jsx>{`
  .trigger {
     padding: 0 24px;
@@ -124,6 +118,6 @@ export default function newUser() {
     background: #ffffff;
   }
 `}</style>
-        </CustomLayout>
+        </CustomLayout>        
     )
 }

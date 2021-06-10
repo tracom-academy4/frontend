@@ -34,7 +34,6 @@ export default function Home() {
         <title>MEET PLANNER</title>
         <meta name="description" content=" " />
         <link rel="icon" href="/favicon Tracom.ico" />
-
       </Head>
 
       <main className={styles.main}>

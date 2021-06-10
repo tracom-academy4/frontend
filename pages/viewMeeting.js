@@ -17,13 +17,11 @@ const text = `
   Meeting will be held in meeting room block A
 
 `;
-
 const text1 = `
   Tracom Services has a meeting on Wednesday 06/08/21 at 9.00AM.
   Meeting will be held in meeting room block A
 
 `;
-
 const Perg = `
   Tracom Services has a meeting on Wednesday 06/08/21 at 9.00AM.
   Meeting will be held in meeting room block A

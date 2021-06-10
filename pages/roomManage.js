@@ -14,8 +14,6 @@ import { StickyContainer, Sticky } from 'react-sticky';
 import { HomeOutlined } from '@ant-design/icons';
 import CustomLayout from '../components/layout';
 
-
-
 export default function roomManage() {
     const [componentSize, setComponentSize] = useState('default');
     const onFormLayoutChange = ({ size }) => {

@@ -26,7 +26,6 @@ const data = [
         lastName: '',
         email: '',
         Organization: '',
-
     },
 ];
 

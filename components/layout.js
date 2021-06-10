@@ -2,13 +2,10 @@ import React, { Component } from 'react'
 import Link from 'next/link'
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
-  DesktopOutlined,
   PieChartOutlined,
   UserAddOutlined,
-  PlusCircleOutlined,
   CloseOutlined,
   FileOutlined,
-  TeamOutlined,
   UserOutlined,
   SolutionOutlined,
   HomeOutlined,
@@ -32,19 +29,7 @@ export default class CustomLayout extends React.Component {
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
 
-          <div className="logo" >
-          <a
-              href="https://tracom.co.ke/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Powered by{' '}
-              <span className={styles.logo}>
-                <Image src="/tracom-logo-blue.svg" alt="Tracom logo" width={72} height={16} />
-              </span>
-            </a>
-            
-          </div>
+          <div className="logo" />
 
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item key="1" icon={<PieChartOutlined />}>
@@ -124,24 +109,14 @@ export default class CustomLayout extends React.Component {
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>Home</Breadcrumb.Item>
-              <Breadcrumb.Item> {{ pages }} </Breadcrumb.Item>
+              <Breadcrumb.Item> {} </Breadcrumb.Item>
             </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
               {this.props.children}
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>
-            <a
-              href="https://tracom.co.ke/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Powered by{' '}
-              <span className={styles.logo}>
-                <Image src="/tracom-logo-blue.svg" alt="Tracom logo" width={72} height={16} />
-              </span>
-            </a>
-          </Footer>
+          <Footer style={{ textAlign: 'center' }}/>
+            
         </Layout>
         <style jsx>{`
  .trigger {
