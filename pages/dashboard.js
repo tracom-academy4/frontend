@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import styles from '../styles/Home.module.css'
+import Image from 'next/image'
 import Link from 'next/link'
 import { Calendar, Badge } from 'antd';
 import { Layout, Menu, Breadcrumb } from 'antd';
@@ -139,13 +141,26 @@ export default class home extends React.Component {
                 </Row>,
             </div>
 
-            <div className="site-calendar-demo-card">
-              <Calendar fullscreen={false} onPanelChange={onPanelChange} />
-            </div>
+              <div className="site-calendar-demo-card">
+                <Calendar fullscreen={false} onPanelChange={onPanelChange} />
+              </div>
 
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>Tracom Services Limited</Footer>
+
+          <Footer style={{ textAlign: 'center' }}>
+            <a
+              href="https://tracom.co.ke/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Powered by{' '}
+              <span className={styles.logo}>
+                <Image src="/tracom-logo-blue.svg" alt="Vercel logo" width={72} height={16} />
+              </span>
+            </a>
+          </Footer>
+          
         </Layout>
         <style jsx>{`
  .trigger {

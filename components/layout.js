@@ -31,7 +31,21 @@ export default class CustomLayout extends React.Component {
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
-          <div className="logo" />
+
+          <div className="logo" >
+          <a
+              href="https://tracom.co.ke/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Powered by{' '}
+              <span className={styles.logo}>
+                <Image src="/tracom-logo-blue.svg" alt="Tracom logo" width={72} height={16} />
+              </span>
+            </a>
+            
+          </div>
+
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item key="1" icon={<PieChartOutlined />}>
               <Link href="./dashboard">
@@ -66,15 +80,15 @@ export default class CustomLayout extends React.Component {
               </Menu.Item>
               */}
             </SubMenu>
-              
-   
-            <SubMenu key="sub3" icon={<HomeOutlined />} title="Room Management" href= "./roomManage" >
-            
+
+
+            <SubMenu key="sub3" icon={<HomeOutlined />} title="Room Management" href="./roomManage" >
+
               <Menu.Item key="6">
                 <Link href="./createRoom">
                   Create Room
                 </Link>
-                
+
               </Menu.Item>
 
               <Menu.Item key="7">
@@ -95,7 +109,7 @@ export default class CustomLayout extends React.Component {
               */}
 
             </SubMenu>
-            
+
 
             <Menu.Item key="9" icon={<FileOutlined />}>
               <Link href="/">
@@ -110,13 +124,24 @@ export default class CustomLayout extends React.Component {
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>Home</Breadcrumb.Item>
-              <Breadcrumb.Item>  </Breadcrumb.Item>
+              <Breadcrumb.Item> {{ pages }} </Breadcrumb.Item>
             </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
               {this.props.children}
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>Tracom Services Limited</Footer>
+          <Footer style={{ textAlign: 'center' }}>
+            <a
+              href="https://tracom.co.ke/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Powered by{' '}
+              <span className={styles.logo}>
+                <Image src="/tracom-logo-blue.svg" alt="Tracom logo" width={72} height={16} />
+              </span>
+            </a>
+          </Footer>
         </Layout>
         <style jsx>{`
  .trigger {
