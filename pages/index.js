@@ -46,18 +46,6 @@ export default function Home() {
           Get your meeting started ASAP!
         </p>
 
-        
-        <div className={styles.signUp}>
-          
-            <Button type="primary" htmlType="submit">
-              <Link href="./register">
-                Sign Up
-              </Link>
-            </Button>
-          
-        </div>
-
-        
         <div className={styles.forms}>
           <Form
             {...layout}
@@ -107,6 +95,17 @@ export default function Home() {
             </Form.Item>
 
             <Form.Item>
+              <div className={styles.signUp}>
+
+                <Button type="primary" htmlType="submit">
+                  <Link href="./register">
+                    Sign Up
+                  </Link>
+                </Button>
+
+                <p>New User?</p>
+
+              </div>
 
             </Form.Item>
 
