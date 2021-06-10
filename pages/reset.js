@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import { Form, Input, Button, Checkbox } from 'antd';
 const layout = {
     labelCol: {

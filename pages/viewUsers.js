@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import { Table, Tag, Space } from 'antd';
 import CustomLayout from '../components/layout';
 

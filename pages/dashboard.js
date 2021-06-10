@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
+import { Calendar, Badge } from 'antd';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import { Statistic, Row, Col, Button } from 'antd';
 import {
@@ -18,48 +19,89 @@ import {
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
+function onPanelChange(value, mode) {
+  console.log(value, mode);
+}
+
 export default class home extends React.Component {
-    state = {
-        collapsed: false,
-      };
-    
-      onCollapse = collapsed => {
-        console.log(collapsed);
-        this.setState({ collapsed });
-      };
-    render() {
-        const { collapsed } = this.state;
-        return (
-            <Layout style={{ minHeight: '100vh' }}>
+  state = {
+    collapsed: false,
+  };
+
+  onCollapse = collapsed => {
+    console.log(collapsed);
+    this.setState({ collapsed });
+  };
+  render() {
+    const { collapsed } = this.state;
+    return (
+      <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
           <div className="logo" />
-          
+
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item key="1" icon={<PieChartOutlined />}>
-              Dashboard
+              <Link href="./dashboard">
+                Dashboard
+              </Link>
             </Menu.Item>
 
-            <SubMenu key="sub1" icon={<UserOutlined />} title="User Management">             
-              <Menu.Item key="2" icon={<UserAddOutlined />}>Add new user</Menu.Item>              
-              <Menu.Item key="3" icon={<CloseOutlined />}>View users</Menu.Item>
+            <SubMenu key="sub1" icon={<UserOutlined />} title="User Management">
+              <Menu.Item key="2" icon={<UserAddOutlined />}>
+                <Link href="./new">
+                  Add new user
+                </Link>
+              </Menu.Item>
+
+              <Menu.Item key="3" icon={<CloseOutlined />}>
+                <Link href="./viewUsers">
+                  View users
+                </Link>
+              </Menu.Item>
             </SubMenu>
 
             <SubMenu key="sub2" icon={<SolutionOutlined />} title="Event Management">
-              <Menu.Item key="4">View meetings</Menu.Item>
-              <Menu.Item key="5">Create meeting</Menu.Item>
+              <Menu.Item key="4">
+                <Link href="./viewMeeting">
+                  View Meetings
+                </Link>
+              </Menu.Item>
+
+              {/*
+              <Menu.Item key="5">
+                Create meeting
+              </Menu.Item>
+              */}
+
             </SubMenu>
 
             <SubMenu key="sub3" icon={<HomeOutlined />} title="Room Management">
-              <Menu.Item key="6">View rooms</Menu.Item>
-              <Menu.Item key="7">Create room</Menu.Item>
-              <Menu.Item key="8">Update room</Menu.Item>
-              <Menu.Item key="9">Delete room</Menu.Item>
+              <Menu.Item key="6">
+                <Link href="./createRoom">
+                  Create Room
+                </Link>
+              </Menu.Item>
+
+              <Menu.Item key="7">
+                <Link href="./room">
+                  View Rooms
+                </Link>
+              </Menu.Item>
+
+              <Menu.Item key="8">
+                <Link href="./roomManage">
+                  Edit Room
+                </Link>
+              </Menu.Item>
+
             </SubMenu>
-            
+
             <Menu.Item key="10" icon={<FileOutlined />}>
-              Audit logs
+              <Link href="/">
+                LogOut
+              </Link>
             </Menu.Item>
-            
+
           </Menu>
         </Sider>
         <Layout className="site-layout">
@@ -67,36 +109,40 @@ export default class home extends React.Component {
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>Home</Breadcrumb.Item>
-              <Breadcrumb.Item>/</Breadcrumb.Item>
+              <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
             </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-            
-            <div className={''}>
-            
-            <Row gutter={16}>
-    
-            <Col span={12}>
-              <Statistic title="Room" value={"Block A"} />
-            </Col>
-    
-            <Col span={12}>
-              <Statistic title="In use" value={"YES"} precision={2} />
-              {/*<Button style={{ marginTop: 16 }} type="primary">
+
+              <div className={''}>
+
+                <Row gutter={16}>
+
+                  <Col span={12}>
+                    <Statistic title="Room" value={"Block A"} />
+                  </Col>
+
+                  <Col span={12}>
+                    <Statistic title="In use" value={"YES"} precision={2} />
+                    {/*<Button style={{ marginTop: 16 }} type="primary">
                  Recharge
                </Button>*/}
-            </Col>
-    
-            <Col span={12}>
-               <Statistic title="Meeting participants" value={10} />
-            </Col>
-    
-            <Col span={12}>
-              <Statistic title="Organization" value={"Tracom"} />
-            </Col>
-            
-            </Row>,
+                  </Col>
+
+                  <Col span={12}>
+                    <Statistic title="Meeting participants" value={10} />
+                  </Col>
+
+                  <Col span={12}>
+                    <Statistic title="Organization" value={"Tracom"} />
+                  </Col>
+
+                </Row>,
             </div>
-    
+
+            <div className="site-calendar-demo-card">
+              <Calendar fullscreen={false} onPanelChange={onPanelChange} />
+            </div>
+
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>Tracom Services Limited</Footer>
@@ -123,9 +169,15 @@ export default class home extends React.Component {
   .site-layout .site-layout-background {
     background: #ffffff;
   }
+
+  .site-calendar-demo-card {
+    width: 300px;
+    border: 1px solid #f0f0f0;
+    border-radius: 2px;
+  }
 `}</style>
       </Layout>
-      
-        )
-    }
+
+    )
+  }
 }

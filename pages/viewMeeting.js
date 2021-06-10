@@ -1,4 +1,5 @@
 import { Collapse, Select } from 'antd';
+import Link from 'next/link'
 import { DeleteOutlined} from '@ant-design/icons';
 import { Button } from 'antd';
 import React from 'react';

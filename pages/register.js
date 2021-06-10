@@ -15,9 +15,7 @@ import {
 } from 'antd';
 import CustomLayout from '../components/layout';
 
-
-
-export default function newUser() {
+export default function register() {
     const [componentSize, setComponentSize] = useState('default');
 
     const onFormLayoutChange = ({ size }) => {
@@ -25,12 +23,10 @@ export default function newUser() {
     };
     return (
 
-        <CustomLayout>
-            
             <div>
                 <h2>Please fill the form below to complete action:</h2>
 
-                <>
+                
                     <Form
                         labelCol={{
                             span: 4,
@@ -70,7 +66,7 @@ export default function newUser() {
                                 <Select.Option value="Pergamon">Pergamon</Select.Option>
                             </Select>
                         </Form.Item>
-                        <Form.Item label="Role">
+                        {/*<Form.Item label="Role">
                             <TreeSelect
                                 treeData={[
                                     {
@@ -84,6 +80,7 @@ export default function newUser() {
                                 ]}
                             />
                         </Form.Item>
+                        */}
 
                         <Form.Item label="Password">
                             <Input />
@@ -93,37 +90,17 @@ export default function newUser() {
                         </Form.Item>
 
                         <Form.Item>
-                            <Button>Create user</Button>
+                            <Button>
+                                <Link href="/">
+                                    Create User
+                                </Link>
+                            </Button>
                         </Form.Item>
 
 
 
                     </Form>
-                </>
+                
             </div>
-            <style jsx>{`
- .trigger {
-    padding: 0 24px;
-    font-size: 18px;
-    line-height: 64px;
-    cursor: pointer;
-    transition: color 0.3s;
-  }
-  
- .trigger:hover {
-    color: #1890ff;
-  }
-  
-   .logo {
-    height: 32px;
-    margin: 16px;
-    background: rgba(255, 255, 255, 0.3);
-  }
-  
-  .site-layout .site-layout-background {
-    background: #ffffff;
-  }
-`}</style>
-        </CustomLayout>
     )
 }

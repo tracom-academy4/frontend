@@ -1,32 +1,44 @@
-import React, { useState } from 'react';
-import { Breadcrumb } from 'antd';
-import Link from 'next/link'
+import React, { useState } from 'react'
+import { Checkbox, Divider, InputNumber } from 'antd';
+import { Statistic, Row, Col, Button } from 'antd';
 import {
+    Tabs,
     Form,
     Input,
-    Button,
     Radio,
     Select,
-    Cascader,
-    DatePicker,
-    InputNumber,
-    TreeSelect,
-    Switch,
 } from 'antd';
 import CustomLayout from '../components/layout';
 
-
-
-export default function newUser() {
+export default function createRoom() {
     const [componentSize, setComponentSize] = useState('default');
 
     const onFormLayoutChange = ({ size }) => {
         setComponentSize(size);
     };
-    return (
+    const CheckboxGroup = Checkbox.Group;
 
+    const plainOptions = ['TV', 'Whiteboard', 'Conference Phone'];
+    const defaultCheckedList = ['Whiteboard'];
+
+    const [checkedList, setCheckedList] = React.useState(defaultCheckedList);
+    const [indeterminate, setIndeterminate] = React.useState(true);
+    const [checkAll, setCheckAll] = React.useState(false);
+
+    const onChange = list => {
+        setCheckedList(list);
+        setIndeterminate(!!list.length && list.length < plainOptions.length);
+        setCheckAll(list.length === plainOptions.length);
+    };
+
+    const onCheckAllChange = e => {
+        setCheckedList(e.target.checked ? plainOptions : []);
+        setIndeterminate(false);
+        setCheckAll(e.target.checked);
+    };
+
+    return (
         <CustomLayout>
-            
             <div>
                 <h2>Please fill the form below to complete action:</h2>
 
@@ -52,78 +64,41 @@ export default function newUser() {
                                 <Radio.Button value="large">Large</Radio.Button>
                             </Radio.Group>
                         </Form.Item>
-                        <Form.Item label="First Name">
+                        <Form.Item label="Room Meeting">
                             <Input />
                         </Form.Item>
-                        <Form.Item label="Second Name">
-                            <Input />
-                        </Form.Item>
+
                         <Form.Item label="Email">
                             <Input />
                         </Form.Item>
-                        <Form.Item label="telephone">
-                            <Input />
+
+                        <Form.Item label="Capacity">
+                            <InputNumber />
                         </Form.Item>
+
                         <Form.Item label="Organization">
                             <Select>
                                 <Select.Option value="Tracom">Tracom</Select.Option>
                                 <Select.Option value="Pergamon">Pergamon</Select.Option>
                             </Select>
                         </Form.Item>
-                        <Form.Item label="Role">
-                            <TreeSelect
-                                treeData={[
-                                    {
-                                        title: 'Admin',
-                                        value: 'Admin',
-                                    },
-                                    {
-                                        title: 'Member',
-                                        value: 'Member',
-                                    }
-                                ]}
-                            />
-                        </Form.Item>
-
-                        <Form.Item label="Password">
-                            <Input />
-                        </Form.Item>
-                        <Form.Item label="Confirm Password">
-                            <Input />
-                        </Form.Item>
-
-                        <Form.Item>
-                            <Button>Create user</Button>
-                        </Form.Item>
-
-
-
                     </Form>
                 </>
+                <h4>Select ammenities:</h4>
+
+                        <>
+                            <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
+                                Check all
+                            </Checkbox>
+                            <Divider />
+                            <CheckboxGroup options={plainOptions} value={checkedList} onChange={onChange} />
+                        </>
+                        
+                        <Col span={18}>
+                            <Button>Create Room</Button>
+                        </Col>
+
             </div>
-            <style jsx>{`
- .trigger {
-    padding: 0 24px;
-    font-size: 18px;
-    line-height: 64px;
-    cursor: pointer;
-    transition: color 0.3s;
-  }
-  
- .trigger:hover {
-    color: #1890ff;
-  }
-  
-   .logo {
-    height: 32px;
-    margin: 16px;
-    background: rgba(255, 255, 255, 0.3);
-  }
-  
-  .site-layout .site-layout-background {
-    background: #ffffff;
-  }
-`}</style>
         </CustomLayout>
     )
 }
