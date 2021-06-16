@@ -107,6 +107,9 @@
   font-size: 1.25rem;
   line-height: 1.5;
 }
+.container{
+  background: linear-gradient(125deg, #ECFCFF 0%, #ECFCFF 40%, #B2FCFF calc(40% + 1px), #B2FCFF 60%, #5EDFFF calc(60% + 1px), #5EDFFF 72%, #5EDFFF calc(72% + 1px),  #5EDFFF 100%);
+}
 
 .logo {
   height: 1em;

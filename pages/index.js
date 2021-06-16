@@ -31,14 +31,14 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>MEET PLANNER</title>
+        <title>MEETING PLANNER</title>
         <meta name="description" content=" " />
         <link rel="icon" href="/favicon Tracom.ico" />
       </Head>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          MEET PLANNER
+          MEETING PLANNER
         </h1>
 
         <p className={styles.description}>
