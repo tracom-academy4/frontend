@@ -2,7 +2,16 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import { Form, Input, Col, Button, Checkbox } from 'antd';
+
+import { useRouter } from 'next/router'
+
+import { makeAutoObservable } from "mobx"
+import { observer } from "mobx-react"
+
+import { sleep } from '../utils/utils'
+import { onLogin } from '../apis/apis'
+
+import { Form, Input, Col, Button, Checkbox, notification } from 'antd';
 
 const layout = {
   labelCol: {
@@ -19,10 +28,48 @@ const tailLayout = {
   },
 };
 
-export default function Home() {
-  const onFinish = (values) => {
+
+
+class LoginState {
+  constructor() {
+    makeAutoObservable(this)
+  }
+  isLoading = false;
+
+  onLogin = async (username, password)=>{
+    this.isLoading = true
+    try{
+      await onLogin(username, password)
+      return true;
+    }catch(e){
+      console.log(e);
+      return false;
+    }finally{
+      this.isLoading = false
+    }
+    
+  }
+}
+
+const loginState = new LoginState()
+
+function Home() {
+  const onFinish = async (values) => {
     console.log('Success:', values);
+    const resp = await loginState.onLogin(values.username, values.password)
+    console.log(resp);
+    if(resp){
+      router.push("/dashboard")
+    }else{
+      notification['error']({
+        message: 'Login failed',
+        description:
+          'Invalid username/Password!',
+      });
+    }
   };
+
+  const router = useRouter();
 
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
@@ -86,10 +133,8 @@ export default function Home() {
             </Form.Item>
 
             <Form.Item {...tailLayout}>
-              <Button type="primary" htmlType="submit">
-                <Link href="./dashboard">
-                  Login
-                </Link>
+              <Button type="primary" htmlType="submit" loading = {loginState.isLoading} >
+                Login
               </Button>
             </Form.Item>
 
@@ -120,7 +165,7 @@ export default function Home() {
         >
           Powered by{' '}
           <span className={styles.logo}>
-            <Image src="/tracom-logo-blue.svg" alt="Tracom logo" width={72} height={16} />
+            <Image src="/tracom-logo-blue.svg" alt="Tracom logo" width={100} height={20} />
           </span>
         </a>
       </footer>
@@ -129,3 +174,4 @@ export default function Home() {
 
   )
 }
+export default observer(Home)
