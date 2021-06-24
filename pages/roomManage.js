@@ -177,7 +177,9 @@ export default function roomManage() {
                         </>
                         
                         <Col span={18}>
-                            <Button>Create Room</Button>
+                            <Button submitting={updateState.submitting}>
+                                Create Room
+                            </Button>
                         </Col>
 
                     </TabPane>

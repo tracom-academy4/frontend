@@ -5,7 +5,7 @@ import { Form, Select, Input, Button, Switch, DatePicker, Radio } from 'antd'
 import FormBuilder from 'antd-form-builder'
 import CustomLayout from '../components/layout'
 
-import { useRouter } from 'next/router'
+import router, { useRouter } from 'next/router'
 
 import { makeAutoObservable } from "mobx"
 import { observer } from "mobx-react"
@@ -14,28 +14,28 @@ import { postEvent, putEvent, delEvents } from '../apis/apis'
 
 class EventState {
     constructor() {
-      makeAutoObservable(this)
+        makeAutoObservable(this)
     }
     isEmpty = true;
     isSubmitting = false;
-  
+
     postEvent = async (event_id, meeting_end_date, meeting_start_date, capacity, description, repetitive, topic) => {
-  
-      this.isEmpty = false
-      this.submitting = true
-  
-      try {
-        await postEvent(event_id, meeting_end_date, meeting_start_date, capacity, description, repetitive, topic)
-      } catch (e) {
-        console.log(e);
-      } finally {
-        this.isEmpty = true
-        this.submitting = false
-      }
+
+        this.isEmpty = false
+        this.submitting = true
+
+        try {
+            await postEvent(event_id, meeting_end_date, meeting_start_date, capacity, description, repetitive, topic)
+        } catch (e) {
+            console.log(e);
+        } finally {
+            this.isEmpty = true
+            this.submitting = false
+        }
     }
-  }
-  
-  const eventState = new EventState()
+}
+
+const eventState = new EventState()
 
 const { Option } = Select
 
@@ -48,6 +48,7 @@ export default function meetDetails() {
         { key: 'name.organization', label: 'Organization', required: true },
         { key: 'dom', label: 'Date of meeting', widget: 'date-picker', required: true },
     ]
+
     const meta2 = [
         {
             key: 'email',
@@ -58,6 +59,16 @@ export default function meetDetails() {
         { key: 'meeting topic', label: 'Meeting topic', required: true },
 
     ]
+    const sub = await eventState.postEvent(values)
+
+    if (sub) {
+        console.log(sub);
+    } else {
+        notification['error']({
+        message: 'Submit failed'
+        })
+    }
+
     return (
         <CustomLayout>
             <div>
@@ -108,7 +119,7 @@ export default function meetDetails() {
                     </Form.Item>
 
                     <Form.Item wrapperCol={{ span: 16, offset: 8 }} className="form-footer">
-                        <Button htmlType="submit" type="primary">
+                        <Button htmlType="submit" type="primary" submitting={eventState.submitting}>
                             Submit
                         </Button>
                     </Form.Item>

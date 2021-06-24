@@ -6,26 +6,24 @@ import React from 'react';
 import CustomLayout from '../components/layout';
 
 import { getBoardRoomMeeting, getAllEvents, delEvents} from '../apis/apis'
+import { get } from 'mobx';
 
 class GetEventState {
   constructor() {
     makeAutoObservable(this)
   }
-  isEmpty = true;
-  isSubmitting = false;
+  
 
   getBoardRoomMeeting = async (event_id, meeting_end_date, meeting_start_date, capacity, description, repetitive, topic) => {
 
-    this.isEmpty = false
-    this.submitting = true
-
+    
     try {
       await getBoardRoomMeeting(event_id, meeting_end_date, meeting_start_date, capacity, description, repetitive, topic)
     } catch (e) {
       console.log(e);
     } finally {
-      this.isEmpty = true
-      this.submitting = false
+      get (event_id, meeting_end_date, meeting_start_date, capacity, description, repetitive, topic)
+      
     }
   }
 }
@@ -75,15 +73,15 @@ const Perg = `
 //delete event 
 const genExtra = () => (
   <div>
-  <Button type="primary" danger htmlType="submit" loading = {}>   
+  <Button type="primary" danger htmlType="submit" >   
   <DeleteOutlined
     onClick={event => {
       // If you don't want click extra trigger collapse, you can prevent this:
-      event.stopPropagation();
+      event.delete({event_id});
     }}
   />
-  </Button> 
-  </div>
+  </Button>
+  </div> 
 );
 
 export default class viewMeeting extends React.Component {

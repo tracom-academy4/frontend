@@ -65,6 +65,7 @@ function createRoom() {
     };
 
     const response = await roomState.getRooms(roomMeeting, email, capacity, organization)
+    console.log(response)
 
     return (
         <CustomLayout>
@@ -123,7 +124,7 @@ function createRoom() {
                 </>
 
                 <Col span={18}>
-                    <Button htmlType="submit" submitting={newState.submitting}>
+                    <Button htmlType="submit" submitting={createRoomState.submitting}>
                         Create Room
                     </Button>
                 </Col>

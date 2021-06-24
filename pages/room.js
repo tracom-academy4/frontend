@@ -6,7 +6,7 @@ import { HomeOutlined } from '@ant-design/icons';
 import { Table, Tag, Space } from 'antd';
 import { Statistic, Row, Col, Button } from 'antd';
 
-import { makeAutoObservable } from "mobx"
+import { get, makeAutoObservable } from "mobx"
 import { observer } from "mobx-react"
 
 import { getRooms } from '../apis/apis'
@@ -15,21 +15,15 @@ class RoomState {
   constructor() {
     makeAutoObservable(this)
   }
-  isEmpty = true;
-  isSubmitting = false;
 
-  getRooms = async (roomMeeting, email, capacity, organization) => {
-
-    this.isEmpty = false
-    this.submitting = true
+  getRooms = async (room_id, capacity, phone_conference_description, room_name, tv_description, white_board_description) => {
 
     try {
-      await getRooms(roomMeeting, email, capacity, organization)
+      await getRooms(room_id, capacity, phone_conference_description, room_name, tv_description, white_board_description)
     } catch (e) {
       console.log(e);
     } finally {
-      this.isEmpty = true
-      this.submitting = false
+      get (room_id, capacity, phone_conference_description, room_name, tv_description, white_board_description)
     }
   }
 }
