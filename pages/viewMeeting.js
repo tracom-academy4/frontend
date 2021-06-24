@@ -1,7 +1,6 @@
 import { Collapse, Select } from 'antd';
 import Link from 'next/link'
 import { DeleteOutlined} from '@ant-design/icons';
-<<<<<<< HEAD
 import { Modal ,Button, Space } from 'antd';
 import React from 'react';
 import CustomLayout from '../components/layout';
@@ -48,12 +47,6 @@ const config = {
 
 const [modal, contextHolder] = Modal.useModal();
 
-=======
-import { Button } from 'antd';
-import React from 'react';
-import CustomLayout from '../components/layout';
-
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
 const { Panel } = Collapse;
 const { Option } = Select;
 
@@ -77,7 +70,6 @@ const Perg = `
 
 `;
 
-<<<<<<< HEAD
 //delete event 
 const genExtra = () => (
   <div>
@@ -90,19 +82,6 @@ const genExtra = () => (
   />
   </Button>
   </div> 
-=======
-const genExtra = () => (
-  <div>
-  <Button type="primary" danger>   
-  <DeleteOutlined
-    onClick={event => {
-      // If you don't want click extra trigger collapse, you can prevent this:
-      event.stopPropagation();
-    }}
-  />
-  </Button> 
-  </div>
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
 );
 
 export default class viewMeeting extends React.Component {
@@ -136,18 +115,12 @@ export default class viewMeeting extends React.Component {
               <Panel header="PERGAMON 2PM||08/06/21" key="4" extra={genExtra()}>
                 <div>{Perg}</div>
               </Panel>
-<<<<<<< HEAD
 
             </Collapse>
             <br />
 
             <span>Expand Icon Position: </span>
 
-=======
-            </Collapse>
-            <br />
-            <span>Expand Icon Position: </span>
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
             <Select
               value={expandIconPosition}
               style={{ margin: '0 8px' }}

@@ -2,7 +2,6 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-<<<<<<< HEAD
 
 import { useRouter } from 'next/router'
 
@@ -13,9 +12,6 @@ import { sleep } from '../utils/utils'
 import { onLogin } from '../apis/apis'
 
 import { Form, Input, Col, Button, Checkbox, notification } from 'antd';
-=======
-import { Form, Input, Col, Button, Checkbox } from 'antd';
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
 
 const layout = {
   labelCol: {
@@ -32,7 +28,6 @@ const tailLayout = {
   },
 };
 
-<<<<<<< HEAD
 class LoginState {
   constructor() {
     makeAutoObservable(this)
@@ -74,13 +69,6 @@ function Home() {
 
   const router = useRouter();
 
-=======
-export default function Home() {
-  const onFinish = (values) => {
-    console.log('Success:', values);
-  };
-
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
@@ -88,22 +76,14 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-<<<<<<< HEAD
         <title>MEETING PLANNER</title>
-=======
-        <title>MEET PLANNER</title>
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
         <meta name="description" content=" " />
         <link rel="icon" href="/favicon Tracom.ico" />
       </Head>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-<<<<<<< HEAD
           MEETING PLANNER
-=======
-          MEET PLANNER
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
         </h1>
 
         <p className={styles.description}>
@@ -151,26 +131,15 @@ export default function Home() {
             </Form.Item>
 
             <Form.Item {...tailLayout}>
-<<<<<<< HEAD
               <Button type="primary" htmlType="submit" loading = {loginState.isLoading} >
                 Login
-=======
-              <Button type="primary" htmlType="submit">
-                <Link href="./dashboard">
-                  Login
-                </Link>
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
               </Button>
             </Form.Item>
 
             <Form.Item>
               <div className={styles.signUp}>
 
-<<<<<<< HEAD
                 <Button type="primary" htmlType="submit" loading = {loginState.isLoading}>
-=======
-                <Button type="primary" htmlType="submit">
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
                   <Link href="./register">
                     Sign Up
                   </Link>
@@ -194,11 +163,7 @@ export default function Home() {
         >
           Powered by{' '}
           <span className={styles.logo}>
-<<<<<<< HEAD
             <Image src="/tracom-logo-blue.svg" alt="Tracom logo" width={100} height={20} />
-=======
-            <Image src="/tracom-logo-blue.svg" alt="Tracom logo" width={72} height={16} />
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
           </span>
         </a>
       </footer>
@@ -207,7 +172,4 @@ export default function Home() {
 
   )
 }
-<<<<<<< HEAD
 export default observer(Home)
-=======
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f

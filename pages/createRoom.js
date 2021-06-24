@@ -1,13 +1,7 @@
 import React, { useState } from 'react'
 import { Checkbox, Divider, InputNumber } from 'antd';
-<<<<<<< HEAD
 import { Col, Button } from 'antd';
 import {
-=======
-import { Statistic, Row, Col, Button } from 'antd';
-import {
-    Tabs,
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
     Form,
     Input,
     Radio,
@@ -15,7 +9,6 @@ import {
 } from 'antd';
 import CustomLayout from '../components/layout';
 
-<<<<<<< HEAD
 import { useRouter } from 'next/router'
 
 import { makeAutoObservable } from "mobx"
@@ -45,9 +38,6 @@ class CreateRoomState {
 const createRoomState = new CreateRoomState()
 
 function createRoom() {
-=======
-export default function createRoom() {
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
     const [componentSize, setComponentSize] = useState('default');
 
     const onFormLayoutChange = ({ size }) => {
@@ -74,12 +64,9 @@ export default function createRoom() {
         setCheckAll(e.target.checked);
     };
 
-<<<<<<< HEAD
     const response = await roomState.getRooms(roomMeeting, email, capacity, organization)
     console.log(response)
 
-=======
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
     return (
         <CustomLayout>
             <div>
@@ -128,7 +115,6 @@ export default function createRoom() {
                 </>
                 <h4>Select ammenities:</h4>
 
-<<<<<<< HEAD
                 <>
                     <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
                         Check all
@@ -142,25 +128,9 @@ export default function createRoom() {
                         Create Room
                     </Button>
                 </Col>
-=======
-                        <>
-                            <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
-                                Check all
-                            </Checkbox>
-                            <Divider />
-                            <CheckboxGroup options={plainOptions} value={checkedList} onChange={onChange} />
-                        </>
-                        
-                        <Col span={18}>
-                            <Button>Create Room</Button>
-                        </Col>
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
             </div>
         </CustomLayout>
     )
 }
-<<<<<<< HEAD
 
 export default observer(createRoom)
-=======
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f

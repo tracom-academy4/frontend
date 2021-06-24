@@ -6,33 +6,6 @@ import { HomeOutlined } from '@ant-design/icons';
 import { Table, Tag, Space } from 'antd';
 import { Statistic, Row, Col, Button } from 'antd';
 
-<<<<<<< HEAD
-import { get, makeAutoObservable } from "mobx"
-import { observer } from "mobx-react"
-
-import { getRooms } from '../apis/apis'
-
-class RoomState {
-  constructor() {
-    makeAutoObservable(this)
-  }
-
-  getRooms = async (room_id, capacity, phone_conference_description, room_name, tv_description, white_board_description) => {
-
-    try {
-      await getRooms(room_id, capacity, phone_conference_description, room_name, tv_description, white_board_description)
-    } catch (e) {
-      console.log(e);
-    } finally {
-      get (room_id, capacity, phone_conference_description, room_name, tv_description, white_board_description)
-    }
-  }
-}
-
-const roomState = new RoomState()
-
-=======
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
 const { Column, ColumnGroup } = Table;
 const { TabPane } = Tabs;
 
@@ -86,11 +59,7 @@ export default function room() {
                 </Col>
 
               </Row>,
-<<<<<<< HEAD
             </div>
-=======
-        </div>
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
 
           </TabPane>
           {/*

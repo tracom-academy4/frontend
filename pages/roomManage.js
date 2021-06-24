@@ -5,22 +5,14 @@ import {
     Input,
     Radio,
     Select,
-<<<<<<< HEAD
 } from 'antd';
 import { Checkbox, Divider } from 'antd';
 import { List } from 'antd';
-=======
-    TreeSelect,
-} from 'antd';
-import { Checkbox, Divider } from 'antd';
-import { List, Avatar } from 'antd';
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
 import { Statistic, Row, Col, Button } from 'antd';
 import { StickyContainer, Sticky } from 'react-sticky';
 import { HomeOutlined } from '@ant-design/icons';
 import CustomLayout from '../components/layout';
 
-<<<<<<< HEAD
 import { useRouter } from 'next/router'
 
 import { makeAutoObservable } from "mobx"
@@ -53,8 +45,6 @@ class UpdateRoomState {
   
   const updateRoomState = new UpdateRoomState()
 
-=======
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
 export default function roomManage() {
     const [componentSize, setComponentSize] = useState('default');
     const onFormLayoutChange = ({ size }) => {
@@ -187,13 +177,9 @@ export default function roomManage() {
                         </>
                         
                         <Col span={18}>
-<<<<<<< HEAD
                             <Button submitting={updateState.submitting}>
                                 Create Room
                             </Button>
-=======
-                            <Button>Create Room</Button>
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
                         </Col>
 
                     </TabPane>
@@ -316,10 +302,6 @@ export default function roomManage() {
 
     )
 
-<<<<<<< HEAD
 }
 
 export default observer(roomManage)
-=======
-}
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
