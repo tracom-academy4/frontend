@@ -6,6 +6,7 @@ import { HomeOutlined } from '@ant-design/icons';
 import { Table, Tag, Space } from 'antd';
 import { Statistic, Row, Col, Button } from 'antd';
 
+<<<<<<< HEAD
 import { get, makeAutoObservable } from "mobx"
 import { observer } from "mobx-react"
 
@@ -30,6 +31,8 @@ class RoomState {
 
 const roomState = new RoomState()
 
+=======
+>>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
 const { Column, ColumnGroup } = Table;
 const { TabPane } = Tabs;
 
@@ -83,7 +86,11 @@ export default function room() {
                 </Col>
 
               </Row>,
+<<<<<<< HEAD
             </div>
+=======
+        </div>
+>>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
 
           </TabPane>
           {/*

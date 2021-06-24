@@ -5,6 +5,7 @@ import { Form, Select, Input, Button, Switch, DatePicker, Radio } from 'antd'
 import FormBuilder from 'antd-form-builder'
 import CustomLayout from '../components/layout'
 
+<<<<<<< HEAD
 import router, { useRouter } from 'next/router'
 
 import { makeAutoObservable } from "mobx"
@@ -37,6 +38,8 @@ class EventState {
 
 const eventState = new EventState()
 
+=======
+>>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
 const { Option } = Select
 
 export default function meetDetails() {
@@ -48,7 +51,10 @@ export default function meetDetails() {
         { key: 'name.organization', label: 'Organization', required: true },
         { key: 'dom', label: 'Date of meeting', widget: 'date-picker', required: true },
     ]
+<<<<<<< HEAD
 
+=======
+>>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
     const meta2 = [
         {
             key: 'email',
@@ -59,6 +65,7 @@ export default function meetDetails() {
         { key: 'meeting topic', label: 'Meeting topic', required: true },
 
     ]
+<<<<<<< HEAD
     const sub = await eventState.postEvent(values)
 
     if (sub) {
@@ -69,6 +76,8 @@ export default function meetDetails() {
         })
     }
 
+=======
+>>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
     return (
         <CustomLayout>
             <div>
@@ -119,7 +128,11 @@ export default function meetDetails() {
                     </Form.Item>
 
                     <Form.Item wrapperCol={{ span: 16, offset: 8 }} className="form-footer">
+<<<<<<< HEAD
                         <Button htmlType="submit" type="primary" submitting={eventState.submitting}>
+=======
+                        <Button htmlType="submit" type="primary">
+>>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
                             Submit
                         </Button>
                     </Form.Item>
@@ -130,6 +143,10 @@ export default function meetDetails() {
         </CustomLayout>
 
     )
+<<<<<<< HEAD
 }
 
 export default observer(meetDetails)
+=======
+}
+>>>>>>> 87859a5df246658bf05a96265484818d25d2a91f

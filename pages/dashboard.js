@@ -69,6 +69,7 @@ export default class home extends React.Component {
                 </Link>
               </Menu.Item>
 
+<<<<<<< HEAD
 
               <Menu.Item key="5">
                 <Link href="./meetDetails">
@@ -76,6 +77,13 @@ export default class home extends React.Component {
                 </Link>
               </Menu.Item>
 
+=======
+              {/*
+              <Menu.Item key="5">
+                Create meeting
+              </Menu.Item>
+              */}
+>>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
 
             </SubMenu>
 
@@ -163,7 +171,11 @@ export default class home extends React.Component {
               </span>
             </a>
           </Footer>
+<<<<<<< HEAD
 
+=======
+          
+>>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
         </Layout>
         <style jsx>{`
  .trigger {

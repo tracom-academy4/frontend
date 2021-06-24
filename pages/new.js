@@ -7,6 +7,7 @@ import {
     Button,
     Radio,
     Select,
+<<<<<<< HEAD
     TreeSelect,
 } from 'antd';
 import CustomLayout from '../components/layout';
@@ -39,13 +40,29 @@ const newState = new NewState()
 
 
 function newUser() {
+=======
+    Cascader,
+    DatePicker,
+    InputNumber,
+    TreeSelect,
+    Switch,
+} from 'antd';
+import CustomLayout from '../components/layout';
+
+export default function newUser() {
+>>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
     const [componentSize, setComponentSize] = useState('default');
 
     const onFormLayoutChange = ({ size }) => {
         setComponentSize(size);
     };
+<<<<<<< HEAD
     return (
         <CustomLayout>
+=======
+    return (        
+        <CustomLayout>            
+>>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
             <div>
                 <h2>Please fill the form below to complete action:</h2>
 
@@ -112,14 +129,22 @@ function newUser() {
                         </Form.Item>
 
                         <Form.Item>
+<<<<<<< HEAD
                             <Button htmlType="submit" submitting={newState.submitting}>
                                 Create user
                             </Button>
+=======
+                            <Button>Create user</Button>
+>>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
                         </Form.Item>
 
                     </Form>
                 </>
+<<<<<<< HEAD
             </div>
+=======
+            </div>            
+>>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
             <style jsx>{`
  .trigger {
     padding: 0 24px;
@@ -143,7 +168,13 @@ function newUser() {
     background: #ffffff;
   }
 `}</style>
+<<<<<<< HEAD
         </CustomLayout>
     )
 }
 export default observer(newUser)
+=======
+        </CustomLayout>        
+    )
+}
+>>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
