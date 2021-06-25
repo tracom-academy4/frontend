@@ -6,10 +6,6 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-<<<<<<< HEAD
-
-=======
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
 }
 
 .main {
@@ -40,49 +36,32 @@
 .title a {
   color: #0070f3;
   text-decoration: none;
-<<<<<<< HEAD
-
-=======
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
 }
 
 .title a:hover,
 .title a:focus,
 .title a:active {
   text-decoration: underline;
-<<<<<<< HEAD
 
   
-=======
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
 }
 
 .title {
   margin: 0;
   line-height: 1.15;
   font-size: 4rem;
-<<<<<<< HEAD
   
-=======
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
 }
 
 .title,
 .description {
   text-align: center;
-<<<<<<< HEAD
-
-=======
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
 }
 
 .description {
   line-height: 1.5;
   font-size: 1.5rem;
-<<<<<<< HEAD
   
-=======
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
 }
 
 .code {
@@ -101,10 +80,7 @@
   flex-wrap: wrap;
   max-width: 800px;
   margin-top: 3rem;
-<<<<<<< HEAD
   
-=======
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
 }
 
 .card {
@@ -131,23 +107,16 @@
   font-size: 1.5rem;
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
 .card p {
   margin: 0;
   font-size: 1.25rem;
   line-height: 1.5;
 }
-<<<<<<< HEAD
 .container{
   background: linear-gradient(125deg, #ECFCFF 0%, #ECFCFF 40%, #B2FCFF calc(40% + 1px), #B2FCFF 60%, #5EDFFF calc(60% + 1px), #5EDFFF 72%, #5EDFFF calc(72% + 1px),
     #5EDFFF 100%);
     
 }
-=======
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
 
 .logo {
   height: 1em;

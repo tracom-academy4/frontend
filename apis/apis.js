@@ -1,6 +1,7 @@
 const axios = require('axios');
 
-const baseUrl = 'http:/localhost/3000'
+const baseUrl = 'http://192.168.254.125:8080'
+const token =  'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNDY1MDE5NCwiaWF0IjoxNjI0NjE0MTk0fQ.M0xeYdyHNNmGDf19hah-pW9bI1VNApRKEc92zRipLfs'
 
 //POST LOGIN
 async function onLogin(username, password) {
@@ -32,35 +33,20 @@ ROOMS
 
 
 //GET ROOMS ... -> frontend(room)
-async function getRooms(room_id, capacity, phone_conference_description, room_name, tv_description, white_board_description) {
-
+async function getRooms() {
     var axios = require('axios');
-    var data = JSON.stringify({
-        "room_id": room_id,
-        "capacity": capacity,
-        "phone_conference_description": phone_conference_description,
-        "room_name": room_name,
-        "tv_description": tv_description,
-        "white_board_description": white_board_description
-    });
 
     var config = {
-        method: 'get',
-        url: baseUrl + '/room',
-        headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNDMwNzkyNywiaWF0IjoxNjI0MjcxOTI3fQ.hZ7VJEQEfDvbfOWETw3edxhteFn_wGCg152xz9lsCZ4',
-            'Content-Type': 'application/json'
-        },
-        data: data
+      method: 'get',
+      url: baseUrl + '/api/rooms',
+      headers: { 
+        'Authorization': 'Bearer ' + token
+      }
     };
-
-    axios(config)
-        .then(function (response) {
-            console.log(JSON.stringify(response.data));
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+    
+    const resp = await axios(config)
+    return resp.data;
+    
 }
 
 //POST ROOMS ... -> frontend(createRoom)
@@ -111,7 +97,7 @@ async function updateRooms(room_id, capacity, phone_conference_description, room
         method: 'put',
         url: baseUrl + '/api/room',
         headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNDMwNzkyNywiaWF0IjoxNjI0MjcxOTI3fQ.hZ7VJEQEfDvbfOWETw3edxhteFn_wGCg152xz9lsCZ4',
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNDY1MDE5NCwiaWF0IjoxNjI0NjE0MTk0fQ.M0xeYdyHNNmGDf19hah-pW9bI1VNApRKEc92zRipLfs',
             'Content-Type': 'application/json'
         },
         data: data
@@ -127,15 +113,10 @@ async function updateRooms(room_id, capacity, phone_conference_description, room
 }
 
 //DELETE ROOMS ... doesn't appear to be used in the context of rooms... try events!! 
-async function deleteRooms(room_id, capacity, phone_conference_description, room_name, tv_description, white_board_description) {
+async function deleteRooms(room_id) {
     var axios = require('axios');
     var data = JSON.stringify({
-        "room_id": room_id,
-        "capacity": capacity,
-        "phone_conference_description": phone_conference_description,
-        "room_name": room_name,
-        "tv_description": tv_description,
-        "white_board_description": white_board_description
+        "room_id": room_id
     });
 
     var config = {
@@ -249,13 +230,13 @@ EVENTS
 
 
 // GET EVENT 
-async function getBoardRoomMeeting(event_id, meeting_end_date, meeting_start_date, capacity, description, repetitive, topic) {
+async function getBoardRoomMeeting() {
     var axios = require('axios');
     var data = '';
 
     var config = {
         method: 'get',
-        url: baseUrl + '/api/event',
+        url: baseUrl + '/api/event/{eventid}',
         headers: {
             'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNDM5MDYxMywiaWF0IjoxNjI0MzU0NjEzfQ.Q7HpXJv5FU7hvRY3pmUQlcJGHg6ySfBzFZsuXvj7mIg',
             'Content-Type': 'application/json'
@@ -275,7 +256,7 @@ async function getBoardRoomMeeting(event_id, meeting_end_date, meeting_start_dat
 }
 
 //GET ALL EVENTS
-async function getAllEvents(event_id, meeting_end_date, meeting_start_date, capacity, description, repetitive, topic) {
+async function getAllEvents() {
     var axios = require('axios');
     var data = '';
 
@@ -364,7 +345,7 @@ async function putEvent(event_id, meeting_end_date, meeting_start_date, capacity
 }
 
 //DELETE EVENT
-async function delEvents(event_id, meeting_end_date, meeting_start_date, capacity, description, repetitive, topic) {
+async function delEvents(event_id) {
     var axios = require('axios');
     var data = '';
 
@@ -397,7 +378,7 @@ COMPANY
 
 
 //GET COMPANY
-async function getCompany(company_id, company_name) {
+async function getCompany() {
     var axios = require('axios');
     var data = JSON.stringify({
         "company_id": company_id,

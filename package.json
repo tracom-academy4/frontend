@@ -11,12 +11,9 @@
     "@ant-design/icons": "^4.6.2",
     "antd": "^4.16.1",
     "antd-form-builder": "^2.1.3",
-<<<<<<< HEAD
     "axios": "^0.21.1",
     "mobx": "^6.3.2",
     "mobx-react": "^7.2.0",
-=======
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
     "next": "10.2.3",
     "react": "17.0.2",
     "react-dom": "17.0.2",

@@ -1,136 +1,83 @@
-import { Collapse, Select } from 'antd';
-import Link from 'next/link'
-import { DeleteOutlined} from '@ant-design/icons';
-import { Modal ,Button, Space } from 'antd';
-import React from 'react';
-import CustomLayout from '../components/layout';
+import { Table, Tag, Space } from 'antd';
 
-import { getBoardRoomMeeting, getAllEvents, delEvents} from '../apis/apis'
-import { get } from 'mobx';
+import React from 'react'
 
-class GetEventState {
-  constructor() {
-    makeAutoObservable(this)
-  }
-  
+const columns = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+    render: text => <a>{text}</a>,
+  },
+  {
+    title: 'Age',
+    dataIndex: 'age',
+    key: 'age',
+  },
+  {
+    title: 'Address',
+    dataIndex: 'address',
+    key: 'address',
+  },
+  {
+    title: 'Tags',
+    key: 'tags',
+    dataIndex: 'tags',
+    render: tags => (
+      <>
+        {tags.map(tag => {
+          let color = tag.length > 5 ? 'geekblue' : 'green';
+          if (tag === 'loser') {
+            color = 'volcano';
+          }
+          return (
+            <Tag color={color} key={tag}>
+              {tag.toUpperCase()}
+            </Tag>
+          );
+        })}
+      </>
+    ),
+  },
+  {
+    title: 'Action',
+    key: 'action',
+    render: (text, record) => (
+      <Space size="middle">
+        <a>Invite {record.name}</a>
+        <a>Delete</a>
+      </Space>
+    ),
+  },
+];
 
-  getBoardRoomMeeting = async (event_id, meeting_end_date, meeting_start_date, capacity, description, repetitive, topic) => {
+const data = [
+  {
+    key: '1',
+    name: 'John Brown',
+    age: 32,
+    address: 'New York No. 1 Lake Park',
+    tags: ['nice', 'developer'],
+  },
+  {
+    key: '2',
+    name: 'Jim Green',
+    age: 42,
+    address: 'London No. 1 Lake Park',
+    tags: ['loser'],
+  },
+  {
+    key: '3',
+    name: 'Joe Black',
+    age: 32,
+    address: 'Sidney No. 1 Lake Park',
+    tags: ['cool', 'teacher'],
+  },
+];
 
-    
-    try {
-      await getBoardRoomMeeting(event_id, meeting_end_date, meeting_start_date, capacity, description, repetitive, topic)
-    } catch (e) {
-      console.log(e);
-    } finally {
-      get (event_id, meeting_end_date, meeting_start_date, capacity, description, repetitive, topic)
-      
-    }
-  }
+export default function viewMeeting() {
+  return (
+    <Table columns={columns} dataSource={data} />
+  )
 }
 
-const getEventState = new GetEventState()
-
-//antd modal notification
-const ReachableContext = React.createContext();
-const UnreachableContext = React.createContext();
-
-const config = {
-  title: 'Use Hook!',
-  content: (
-    <>
-      <ReachableContext.Consumer>{name => `Reachable: ${name}!`}</ReachableContext.Consumer>
-      <br />
-      <UnreachableContext.Consumer>{name => `Unreachable: ${name}!`}</UnreachableContext.Consumer>
-    </>
-  ),
-};
-
-const [modal, contextHolder] = Modal.useModal();
-
-const { Panel } = Collapse;
-const { Option } = Select;
-
-function callback(key) {
-  console.log(key);
-}
-
-const text = `
-  Tracom Services has a meeting on Wednesday 06/08/21 at 9.00AM.
-  Meeting will be held in meeting room block A
-
-`;
-const text1 = `
-  Tracom Services has a meeting on Wednesday 06/08/21 at 9.00AM.
-  Meeting will be held in meeting room block A
-
-`;
-const Perg = `
-  Tracom Services has a meeting on Wednesday 06/08/21 at 9.00AM.
-  Meeting will be held in meeting room block A
-
-`;
-
-//delete event 
-const genExtra = () => (
-  <div>
-  <Button type="primary" danger htmlType="submit" >   
-  <DeleteOutlined
-    onClick={event => {
-      // If you don't want click extra trigger collapse, you can prevent this:
-      event.delete({event_id});
-    }}
-  />
-  </Button>
-  </div> 
-);
-
-export default class viewMeeting extends React.Component {
-    state = {
-        expandIconPosition: 'left',
-      };
-    
-      onPositionChange = expandIconPosition => {
-        this.setState({ expandIconPosition });
-      };
-    
-      render() {
-        const { expandIconPosition } = this.state;
-        return (
-            <CustomLayout>
-          <>
-            <Collapse
-              defaultActiveKey={['1']}
-              onChange={callback}
-              expandIconPosition={expandIconPosition}
-            >
-              <Panel header="TRACOM 9AM||08/06/21" key="1" extra={genExtra()}>
-                <div>{text}</div>
-              </Panel>
-              <Panel header="TRACOM 11AM||08/06/21" key="2" extra={genExtra()}>
-                <div>{text1}</div>
-              </Panel>
-              <Panel header="PERGAMON 2PM||08/06/21" key="3" extra={genExtra()}>
-                <div>{Perg}</div>
-              </Panel>
-              <Panel header="PERGAMON 2PM||08/06/21" key="4" extra={genExtra()}>
-                <div>{Perg}</div>
-              </Panel>
-
-            </Collapse>
-            <br />
-
-            <span>Expand Icon Position: </span>
-
-            <Select
-              value={expandIconPosition}
-              style={{ margin: '0 8px' }}
-              onChange={this.onPositionChange}
-            >
-              <Option value="left">left</Option>
-              <Option value="right">right</Option>
-            </Select>
-          </>
-          </CustomLayout>
-        );
-    }
-}

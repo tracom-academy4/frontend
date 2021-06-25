@@ -1,120 +1,104 @@
-import React from 'react'
-import Link from 'next/link'
-import CustomLayout from '../components/layout'
-import { Tabs } from 'antd';
-import { HomeOutlined } from '@ant-design/icons';
-import { Table, Tag, Space } from 'antd';
-import { Statistic, Row, Col, Button } from 'antd';
+import { Table, Tag, Space, Button } from 'antd';
 
-const { Column, ColumnGroup } = Table;
-const { TabPane } = Tabs;
+import CustomLayout from '../components/layout';
 
-export default function room() {
+import { makeAutoObservable } from "mobx"
+import { observer, observerBatching } from "mobx-react"
+
+import { getRooms } from '../apis/apis';
+
+import {
+  PlusOutlined,
+
+} from '@ant-design/icons';
+
+import React,{useEffect} from 'react'
+
+const columns = [
+  {
+    title: 'Room ID',
+    dataIndex: 'roomId',
+    key: 'roomId',
+    render: text => <a>{text}</a>,
+  },
+  {
+    title: 'Name',
+    dataIndex: 'roomName',
+    key: 'roomName',
+  },
+  {
+    title: 'Capacity',
+    dataIndex: 'capacity',
+    key: 'capacity',
+  },
+  {
+    title: 'Tv',
+    dataIndex: 'tvDescription',
+    key: 'tvDescription',
+  },
+  {
+    title: 'Whiteboard',
+    dataIndex: 'whiteBoardDescription',
+    key: 'whiteBoardDescription',
+  },
+  {
+    title: 'Phone',
+    dataIndex: 'phoneConferenceDescription',
+    key: 'phoneConferenceDescription',
+  },
+  {
+    title: 'Action',
+    key: 'action',
+    render: (text, record) => (
+      <Space size="middle">
+        <a>Invite {record.name}</a>
+        <a>Delete</a>
+      </Space>
+    ),
+  },
+];
+
+const data = [
+  {
+    "roomId": 20,
+    "capacity": 5,
+    "roomName": "Pergamon Block A",
+    "tvDescription": "present",
+    "whiteBoardDescription": "present",
+    "phoneConferenceDescription": "present"
+  }
+];
+
+class RoomState{
+  isLoading = false;
+  data = []
+  constructor(){
+    makeAutoObservable(this)
+  }
+
+  getRooms = async()=>{
+    this.isLoading = true;
+    this.data = await getRooms()
+    this.isLoading = false;
+  }
+
+}
+
+const roomState = new RoomState();
+
+function viewMeeting() {
+  useEffect(() => {
+    roomState.getRooms()
+  }, []);
   return (
-    <div>
-      <CustomLayout>
-        <Tabs defaultActiveKey="2">
-          <TabPane
-            tab={
-              <span>
-                <HomeOutlined />
-                Block A
-              </span>
-            }
-            key="1"
-          >
-            <div className={''}>
-
-              <Row gutter={16}>
-
-                <Col span={12}>
-                  <Statistic title="Room" value={"Block A"} />
-                </Col>
-
-                <Col span={12}>
-                  <Statistic title="In use" value={"YES"} precision={2} />
-                  {/*<Button style={{ marginTop: 16 }} type="primary">
-                 Recharge
-               </Button>*/}
-                </Col>
-
-                <Col span={12}>
-                  <Statistic title="Capacity" value={10} />
-                </Col>
-
-                <Col span={12}>
-                  <Statistic title="Organization" value={"Tracom"} />
-                </Col>
-
-                <Col span={12}>
-                  <Statistic title="TV" value={"YES"} />
-                </Col>
-
-                <Col span={12}>
-                  <Statistic title="Whiteboard" value={"YES"} />
-                </Col>
-
-                <Col span={12}>
-                  <Statistic title="Conference phone" value={"YES"} />
-                </Col>
-
-              </Row>,
-            </div>
-
-          </TabPane>
-          {/*
-
-          <TabPane
-            tab={
-              <span>
-                <HomeOutlined />
-                Block E
-              </span>
-            }
-            key="2"
-          >
-            <div className={''}>
-
-              <Row gutter={16}>
-
-                <Col span={12}>
-                  <Statistic title="Room" value={"Block E"} />
-                </Col>
-
-                
-                </Col>
-
-                <Col span={12}>
-                  <Statistic title="Capacity" value={20} />
-                </Col>
-
-                <Col span={12}>
-                  <Statistic title="Organization" value={"Tracom"} />
-                </Col>
-
-                <Col span={12}>
-                  <Statistic title="TV" value={"YES"} />
-                </Col>
-
-                <Col span={12}>
-                  <Statistic title="Whiteboard" value={"YES"} />
-                </Col>
-
-                <Col span={12}>
-                  <Statistic title="Conference phone" value={"YES"} />
-                </Col>
-          
-
-
-
-              </Row>,
-        </div>
-          </TabPane>
-        */}
-
-        </Tabs>
-      </CustomLayout>
-    </div>
-
+    <CustomLayout>
+        <Space style={{ marginBottom: 16 }}>
+          <Button  type="primary"  icon={<PlusOutlined />} >Add meeting room</Button>
+        </Space>
+      <Table loading={roomState.isLoading} columns={columns} dataSource={roomState.data} />
+    </CustomLayout>
   )
 }
+
+export default observer(viewMeeting)
+

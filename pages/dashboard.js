@@ -2,17 +2,13 @@ import React, { Component } from 'react'
 import styles from '../styles/Home.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Calendar, Badge } from 'antd';
+import { Calendar } from 'antd';
 import { Layout, Menu, Breadcrumb } from 'antd';
-import { Statistic, Row, Col, Button } from 'antd';
 import {
-  DesktopOutlined,
   PieChartOutlined,
-  UserAddOutlined,
-  PlusCircleOutlined,
+  UserAddOutlined,  
   CloseOutlined,
   FileOutlined,
-  TeamOutlined,
   UserOutlined,
   SolutionOutlined,
   HomeOutlined,
@@ -69,21 +65,11 @@ export default class home extends React.Component {
                 </Link>
               </Menu.Item>
 
-<<<<<<< HEAD
-
               <Menu.Item key="5">
                 <Link href="./meetDetails">
                   Create Meeting
                 </Link>
               </Menu.Item>
-
-=======
-              {/*
-              <Menu.Item key="5">
-                Create meeting
-              </Menu.Item>
-              */}
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
 
             </SubMenu>
 
@@ -171,11 +157,6 @@ export default class home extends React.Component {
               </span>
             </a>
           </Footer>
-<<<<<<< HEAD
-
-=======
-          
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
         </Layout>
         <style jsx>{`
  .trigger {
