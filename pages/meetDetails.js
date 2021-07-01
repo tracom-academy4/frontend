@@ -1,4 +1,4 @@
-import React, { useCallback, } from 'react'
+import React, { useState } from 'react'
 
 import { Form, Select, Input, Button, Switch, DatePicker, Radio } from 'antd'
 import FormBuilder from 'antd-form-builder'
@@ -7,45 +7,32 @@ import CustomLayout from '../components/layout'
 import { makeAutoObservable } from "mobx"
 import { observer } from "mobx-react"
 
-import { postEvent, putEvent, delEvents } from '../apis/apis'
+import { postEvent } from '../apis/apis'
 
 
 const { Option } = Select
 
 class EventState {
+    isLoading = false;
+    meta = []
     constructor() {
         makeAutoObservable(this)
     }
-    isEmpty = true;
-    isSubmitting = false;
-    isLoading = false;
 
-    postEvent = async (event_id, meeting_end_date, meeting_start_date, capacity, description, repetitive, topic) => {
-
-        this.isEmpty = false
-        this.submitting = true
-        this.isLoading = true
-
-        try {
-            await postEvent(event_id, meeting_end_date, meeting_start_date, capacity, description, repetitive, topic)
-        } catch (e) {
-            console.log(e);
-        } finally {
-            this.isEmpty = true
-            this.submitting = false
-            this.isLoading = false
-        }
+    postEvent = async () => {
+        this.isLoading = true;
+        this.meta = await postEvent()
+        this.isLoading = false;
     }
+
 }
-
-const eventState = new EventState()
-
+const eventState = new EventState();
 
 function meetDetails() {
 
     const [form] = Form.useForm()
     const forceUpdate = FormBuilder.useForceUpdate()
-    const handleFinish = useCallback(values => console.log('Submit: ', values), [])
+    let [isSaving, setSaving] = useState(false);
     const meta = [
         { key: 'eventId', label: 'EventId' },
         { key: 'meetingStartDate', label: 'MeetingStartDate', widget: 'date-picker', required: true },
@@ -53,6 +40,10 @@ function meetDetails() {
         { key: 'capacity', label: 'capacity' },
         { key: 'meeting topic', label: 'Meeting topic', required: true }
     ]
+    const handleFinish = React.useCallback(values => {
+        eventState.postRooms(setSaving)
+        console.log('Submit: ', values)
+    }, [])
 
     return (
         <CustomLayout>
@@ -97,7 +88,7 @@ function meetDetails() {
                     </Form.Item>
 
                     <Form.Item wrapperCol={{ span: 16, offset: 8 }} className="form-footer">
-                        <Button htmlType="submit" type="primary" loading={eventState.isloading}>
+                        <Button htmlType="submit" type="primary" loading={isSaving}>
                             Submit
                         </Button>
                     </Form.Item>
@@ -105,7 +96,7 @@ function meetDetails() {
                 </Form>
 
             </div>
-        </CustomLayout>
+        </CustomLayout >
 
     )
 }

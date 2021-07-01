@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import { Breadcrumb } from 'antd';
-import Link from 'next/link'
 import {
     Form,
     Input,
     Button,
     Radio,
     Select,
-<<<<<<< HEAD
     TreeSelect,
 } from 'antd';
 import CustomLayout from '../components/layout';
@@ -15,24 +12,18 @@ import CustomLayout from '../components/layout';
 import { makeAutoObservable } from "mobx"
 import { observer } from "mobx-react"
 
-import { newUser } from '../apis/apis'
+import { newUserCreate } from '../apis/apis'
 
 class NewState {
     constructor() {
         makeAutoObservable(this)
     }
-    submitting = false
+    isLoading = false;
 
-    newUser = async (firstName, secondName, email, telephone, organization, role, password, confirmPassword) => {
-        this.submitting = true
-
-        try {
-            await newUser(firstName, secondName, email, telephone, organization, role, password, confirmPassword)
-        } catch (e) {
-            console.log(e);
-        } finally {
-            this.submitting = false
-        }
+    newUserCreate = async () => {
+        this.isLoading = true;
+        this.meta = await newUserCreate()
+        this.isLoading = false;
     }
 }
 
@@ -40,44 +31,38 @@ const newState = new NewState()
 
 
 function newUser() {
-=======
-    Cascader,
-    DatePicker,
-    InputNumber,
-    TreeSelect,
-    Switch,
-} from 'antd';
-import CustomLayout from '../components/layout';
-
-export default function newUser() {
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
     const [componentSize, setComponentSize] = useState('default');
 
     const onFormLayoutChange = ({ size }) => {
         setComponentSize(size);
     };
-<<<<<<< HEAD
+
+    let [isSaving, setSaving] = useState(false);
+    //const resp = await newState.newUserCreate
+
     return (
         <CustomLayout>
-=======
-    return (        
-        <CustomLayout>            
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
             <div>
                 <h2>Please fill the form below to complete action:</h2>
 
                 <>
                     <Form
+                        meta={meta}
+
                         labelCol={{
                             span: 4,
                         }}
+
                         wrapperCol={{
                             span: 14,
                         }}
+
                         layout="horizontal"
+
                         initialValues={{
                             size: componentSize,
                         }}
+
                         onValuesChange={onFormLayoutChange}
                         size={componentSize}
                     >
@@ -129,22 +114,14 @@ export default function newUser() {
                         </Form.Item>
 
                         <Form.Item>
-<<<<<<< HEAD
-                            <Button htmlType="submit" submitting={newState.submitting}>
+                            <Button type="primary" htmlType="submit" loading={isSaving}>
                                 Create user
                             </Button>
-=======
-                            <Button>Create user</Button>
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
                         </Form.Item>
 
                     </Form>
                 </>
-<<<<<<< HEAD
             </div>
-=======
-            </div>            
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f
             <style jsx>{`
  .trigger {
     padding: 0 24px;
@@ -168,13 +145,7 @@ export default function newUser() {
     background: #ffffff;
   }
 `}</style>
-<<<<<<< HEAD
         </CustomLayout>
     )
 }
 export default observer(newUser)
-=======
-        </CustomLayout>        
-    )
-}
->>>>>>> 87859a5df246658bf05a96265484818d25d2a91f

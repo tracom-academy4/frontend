@@ -94,7 +94,7 @@ export default class home extends React.Component {
 
             </SubMenu>
 
-            <Menu.Item key="10" icon={<FileOutlined />}>
+            <Menu.Item key="9" icon={<FileOutlined />}>
               <Link href="/">
                 LogOut
               </Link>
@@ -110,34 +110,7 @@ export default class home extends React.Component {
               <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
             </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-
-              {/*<div className={''}>
-
-                <Row gutter={16}>
-
-                  <Col span={12}>
-                    <Statistic title="Room" value={"Block A"} />
-                  </Col>
-
-                  <Col span={12}>
-                    <Statistic title="In use" value={"YES"} precision={2} />
-                    {/*<Button style={{ marginTop: 16 }} type="primary">
-                 Recharge
-               </Button>*
-                  </Col>
-
-                  <Col span={12}>
-                    <Statistic title="Meeting participants" value={10} />
-                  </Col>
-
-                  <Col span={12}>
-                    <Statistic title="Organization" value={"Tracom"} />
-                  </Col>
-
-                </Row>,
-            </div>
-            */}
-
+              
               <div className="site-calendar-demo-card">
                 <Calendar fullscreen={false} onPanelChange={onPanelChange} />
               </div>

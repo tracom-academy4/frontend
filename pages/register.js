@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Breadcrumb } from 'antd';
 import Link from 'next/link'
 import {
     Form,
@@ -7,11 +6,7 @@ import {
     Button,
     Radio,
     Select,
-    Cascader,
-    DatePicker,
-    InputNumber,
-    TreeSelect,
-    Switch,
+
 } from 'antd';
 import CustomLayout from '../components/layout';
 
@@ -47,39 +42,29 @@ export default function register() {
                                 <Radio.Button value="large">Large</Radio.Button>
                             </Radio.Group>
                         </Form.Item>
+
                         <Form.Item label="First Name">
                             <Input />
                         </Form.Item>
+
                         <Form.Item label="Second Name">
                             <Input />
                         </Form.Item>
+
                         <Form.Item label="Email">
                             <Input />
                         </Form.Item>
+
                         <Form.Item label="telephone">
                             <Input />
                         </Form.Item>
-                        <Form.Item label="Organization">
+
+                        <Form.Item label="Company">
                             <Select>
                                 <Select.Option value="Tracom">Tracom</Select.Option>
                                 <Select.Option value="Pergamon">Pergamon</Select.Option>
                             </Select>
                         </Form.Item>
-                        {/*<Form.Item label="Role">
-                            <TreeSelect
-                                treeData={[
-                                    {
-                                        title: 'Admin',
-                                        value: 'Admin',
-                                    },
-                                    {
-                                        title: 'Member',
-                                        value: 'Member',
-                                    }
-                                ]}
-                            />
-                        </Form.Item>
-                        */}
 
                         <Form.Item label="Password">
                             <Input />

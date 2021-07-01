@@ -1,127 +1,117 @@
-import React, { useState} from 'react'
-import { Checkbox, Divider, InputNumber } from 'antd';
+import React, { useCallback, useState } from 'react'
+import { Form, Button, Modal } from 'antd'
+import moment from 'moment'
 import FormBuilder from 'antd-form-builder'
-import { Col, Button } from 'antd';
-import {
-    Form,
-    Input,
-    Radio,
-    Select,
-} from 'antd';
-import CustomLayout from '../components/layout';
-
+import CustomLayout from '../components/layout'
+import { updateRooms } from '../apis/apis';
+import { observer } from 'mobx-react'
 import { makeAutoObservable } from "mobx"
-import { observer } from "mobx-react"
-
-import { updateRooms } from '../apis/apis'
 
 class UpdateRoomState {
+    isLoading = false;
     constructor() {
         makeAutoObservable(this)
     }
-    isloading = true;
 
-    updateRooms = async (room_id, capacity, phone_conference_description, room_name, tv_description, white_board_description) => {
-        this.loading = true
-
-        try {
-            await updateRooms(room_id, capacity, phone_conference_description, room_name, tv_description, white_board_description)
-        } catch (e) {
-            console.log(e);
-        } finally {
-            this.loading = false
-        }
+    updateRooms = async () => {
+        this.isLoading = true;
+        this.meta = await updateRooms()
+        this.isLoading = false;
     }
-}
 
-const updateRoomState = new UpdateRoomState()
+}
+const updateRoomState = new UpdateRoomState();
+
+
+const MOCK_INFO = {
+    roomId: '20',
+    roomName : ' Tracom Block A',
+    capacity: '25',
+    email: 'myemail@gmail.com',
+    dateOfMeeting: moment('2100-01-01'),
+    tvDescription: 'present',
+    whiteboardDescription: 'present',
+    phoneConferenceDescription: 'present',
+}
+const DateView = ({ value }) => value.format('MMM Do YYYY')
 
 function roomManage() {
-    const [componentSize, setComponentSize] = useState('default');
+    const [form] = Form.useForm()
+    const [viewMode, setViewMode] = useState(true)
+    const [pending, setPending] = useState(false)
+    const [roomInfo, setRoomInfo] = useState(MOCK_INFO)
 
-    const onFormLayoutChange = ({ size }) => {
-        setComponentSize(size);
-    };
-    const CheckboxGroup = Checkbox.Group;
+    let [isSaving, setSaving]= useState(false);
+    
+    const handleFinish = useCallback(values => {
+        updateRoomState.updateRooms(setSaving)
+        console.log('Submit: ', values)
 
-    const plainOptions = ['TV', 'Whiteboard', 'Conference Phone'];
-    const defaultCheckedList = ['Whiteboard'];
+        setPending(true)
+        setTimeout(() => {
+            setPending(false)
+            setRoomInfo(values)
+            setViewMode(true)
+            Modal.success({
+                title: 'Success',
+                content: 'Infomation updated.',
+            })
+        }, 1500)
+    }, [])
 
-    const [checkedList, setCheckedList] = React.useState(defaultCheckedList);
-    const [indeterminate, setIndeterminate] = React.useState(true);
-    const [checkAll, setCheckAll] = React.useState(false);
+    const getMeta = () => {
+        
+        const meta = {
+            columns: 2,
+            disabled: pending,
+            initialValues: roomInfo,
+            fields: [
+                { key: 'roomId', label: 'room ID', required: true },
+                { key: 'roomName', label: 'Room Name', required: true },
+                { key: 'capacity', label: 'Capacity', required: true },
+                //pending notifications completion
+                { key: 'dateOfMeeting', label: 'Date of Meeting', widget: 'date-picker', viewWidget: DateView, required: true},
+                //{ key: 'email', label: 'Email' },
+                { key: 'tvDescription', label: 'TV' },
+                { key: 'whiteboardDescription', label: 'Whiteboard', colSpan: 2 },
+                { key: 'phoneConferenceDescription', label: 'Phone' },
+            ],
+        }
+        return meta
+    }
 
-    const onChange = list => {
-        setCheckedList(list);
-        setIndeterminate(!!list.length && list.length < plainOptions.length);
-        setCheckAll(list.length === plainOptions.length);
-    };
-
-    const onCheckAllChange = e => {
-        setCheckedList(e.target.checked ? plainOptions : []);
-        setIndeterminate(false);
-        setCheckAll(e.target.checked);
-    };
-
-    return(
+    return (
         <CustomLayout>
-             <div>
-                <h2>Please fill the form below to complete action:</h2>
-                <>
-                    <Form
-                        labelCol={{
-                            span: 4,
-                        }}
-                        wrapperCol={{
-                            span: 14,
-                        }}
-                        layout="horizontal"
-                        initialValues={{
-                            size: componentSize,
-                        }}
-                        onValuesChange={onFormLayoutChange}
-                        size={componentSize}
-                    >
-                        <Form.Item label="Form Size" name="size">
-                            <Radio.Group>
-                                <Radio.Button value="small">Small</Radio.Button>
-                                <Radio.Button value="default">Default</Radio.Button>
-                                <Radio.Button value="large">Large</Radio.Button>
-                            </Radio.Group>
+            <div>
+                <Form layout="horizontal" form={form} onFinish={handleFinish} style={{ width: '800px' }}>
+                    <h1 style={{ height: '40px', fontSize: '16px', marginTop: '50px', color: '#888' }}>
+                        Room Infomation
+                        {viewMode && (
+                            <Button type="link" onClick={() => setViewMode(false)} style={{ float: 'right' }}>
+                                Edit
+                            </Button>
+                        )}
+                    </h1>
+                    <FormBuilder form={form} getMeta={getMeta} viewMode={viewMode} />
+                    {!viewMode && (
+                        <Form.Item className="form-footer" wrapperCol={{ span: 16, offset: 4 }}>
+                            <Button htmlType="submit" type="primary" disabled={pending} loading = { isSaving }>
+                                {pending ? 'Updating...' : 'Update' }
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    form.resetFields()
+                                    setViewMode(true)
+                                }}
+                                style={{ marginLeft: '15px' }}
+                            >
+                                Cancel
+                            </Button>
                         </Form.Item>
-                        <Form.Item label="Room_id">
-                            <InputNumber />
-                        </Form.Item>
-
-                        <Form.Item label="RoomName">
-                            <Input />
-                        </Form.Item>
-
-                        <Form.Item label="Capacity">
-                            <InputNumber />
-                        </Form.Item>
-
-                    </Form>
-                </>
-
-                <h4>Select ammenities:</h4>
-                <>
-                    <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
-                        Check all
-                    </Checkbox>
-                    <Divider />
-                    <CheckboxGroup options={plainOptions} value={checkedList} onChange={onChange} />
-                </>
-
-                <Col span={18}>
-                    <Button htmlType="submit" loading={updateRoomState.isloading}>
-                        Make changes
-                    </Button>
-                </Col>
+                    )}
+                </Form>
             </div>
         </CustomLayout>
-
     )
 }
-
 export default observer(roomManage)

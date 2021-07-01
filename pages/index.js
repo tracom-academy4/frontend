@@ -8,10 +8,9 @@ import { useRouter } from 'next/router'
 import { makeAutoObservable } from "mobx"
 import { observer } from "mobx-react"
 
-import { sleep } from '../utils/utils'
 import { onLogin } from '../apis/apis'
 
-import { Form, Input, Col, Button, Checkbox, notification } from 'antd';
+import { Form, Input, Button, Checkbox, notification } from 'antd';
 
 const layout = {
   labelCol: {
@@ -57,7 +56,7 @@ function Home() {
     const resp = await loginState.onLogin(values.username, values.password)
     console.log(resp);
     if(resp){
-      router.push("/dashboard")
+      router.push("./dashboard")
     }else{
       notification['error']({
         message: 'Login failed',

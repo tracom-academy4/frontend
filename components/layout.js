@@ -58,14 +58,13 @@ export default class CustomLayout extends React.Component {
                 </Link>
               </Menu.Item>
 
-              {/*<Menu.Item key="5">
+              <Menu.Item key="5">
                 <Link href="./viewMeeting">
-                  Cancel Meetings
+                  Create Meeting
                 </Link>
               </Menu.Item>
-              */}
-            </SubMenu>
 
+            </SubMenu>
 
             <SubMenu key="sub3" icon={<HomeOutlined />} title="Room Management" href="./roomManage" >
 
@@ -88,13 +87,7 @@ export default class CustomLayout extends React.Component {
                 </Link>
               </Menu.Item>
 
-              {/*<Menu.Item key="9">
-                Update room
-              </Menu.Item>
-              */}
-
             </SubMenu>
-
 
             <Menu.Item key="9" icon={<FileOutlined />}>
               <Link href="/">
@@ -109,14 +102,14 @@ export default class CustomLayout extends React.Component {
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>Home</Breadcrumb.Item>
-              <Breadcrumb.Item> {} </Breadcrumb.Item>
+              <Breadcrumb.Item> { } </Breadcrumb.Item>
             </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
               {this.props.children}
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}/>
-            
+          <Footer style={{ textAlign: 'center' }} />
+
         </Layout>
         <style jsx>{`
  .trigger {

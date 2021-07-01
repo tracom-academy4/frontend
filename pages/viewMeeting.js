@@ -1,43 +1,35 @@
-import { Table, Tag, Space } from 'antd';
+import { Table, Space } from 'antd';
 
-import React from 'react'
+import React, { useEffect } from 'react'
+import CustomLayout from '../components/layout';
+
+import { makeAutoObservable } from "mobx"
+import { observer } from "mobx-react"
+
+import { getBoardRoomMeeting } from '../apis/apis';
 
 const columns = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
+    title: 'EventId',
+    dataIndex: 'eventId',
+    key: 'eventId',
     render: text => <a>{text}</a>,
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
+    title: 'MeetingStartDate',
+    dataIndex: 'meetingStartDate',
+    key: 'meetingStartDate',
   },
   {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
+    title: 'MeetingEndDate',
+    dataIndex: 'meetingEndDate',
+    key: 'meetingEndDate',
   },
   {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: tags => (
-      <>
-        {tags.map(tag => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
+    title: 'capacity',
+    key: 'capacity',
+    dataIndex: 'capacity',
+   
   },
   {
     title: 'Action',
@@ -51,6 +43,7 @@ const columns = [
   },
 ];
 
+/*
 const data = [
   {
     key: '1',
@@ -75,9 +68,38 @@ const data = [
   },
 ];
 
-export default function viewMeeting() {
+*/
+
+class GetEventState {
+  isLoading = false;
+  data = []
+  constructor() {
+    makeAutoObservable(this)
+  }
+
+  getBoardRoomMeeting = async () => {
+    this.isLoading = true;
+    this.data = await getBoardRoomMeeting()
+    this.isLoading = false;
+  }
+
+}
+
+const getEventState = new GetEventState();
+
+function viewMeeting() {
+
+  useEffect(() => {
+    getEventState.getBoardRoomMeeting()
+  }, []);
+
   return (
-    <Table columns={columns} dataSource={data} />
+    <CustomLayout>
+
+      <Table columns={columns} dataSource={getEventState.data} />
+
+    </CustomLayout>
   )
 }
 
+export default observer(viewMeeting)

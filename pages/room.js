@@ -1,18 +1,16 @@
-import { Table, Tag, Space, Button } from 'antd';
+import { Table, Space, Button } from 'antd';
+import Link from 'next/link'
 
 import CustomLayout from '../components/layout';
 
 import { makeAutoObservable } from "mobx"
-import { observer, observerBatching } from "mobx-react"
+import { observer } from "mobx-react"
 
 import { getRooms } from '../apis/apis';
 
-import {
-  PlusOutlined,
+import { PlusOutlined } from '@ant-design/icons';
 
-} from '@ant-design/icons';
-
-import React,{useEffect} from 'react'
+import React, { useEffect } from 'react'
 
 const columns = [
   {
@@ -58,6 +56,7 @@ const columns = [
   },
 ];
 
+/*
 const data = [
   {
     "roomId": 20,
@@ -68,15 +67,16 @@ const data = [
     "phoneConferenceDescription": "present"
   }
 ];
+*/
 
-class RoomState{
+class RoomState {
   isLoading = false;
   data = []
-  constructor(){
+  constructor() {
     makeAutoObservable(this)
   }
 
-  getRooms = async()=>{
+  getRooms = async () => {
     this.isLoading = true;
     this.data = await getRooms()
     this.isLoading = false;
@@ -90,11 +90,18 @@ function viewMeeting() {
   useEffect(() => {
     roomState.getRooms()
   }, []);
+
+
   return (
     <CustomLayout>
-        <Space style={{ marginBottom: 16 }}>
-          <Button  type="primary"  icon={<PlusOutlined />} >Add meeting room</Button>
-        </Space>
+      <Space style={{ marginBottom: 16 }}>
+        <Button type="primary" icon={<PlusOutlined />} >
+          <Link href="./createRoom">
+            Add meeting room
+          </Link>
+        </Button>
+
+      </Space>
       <Table loading={roomState.isLoading} columns={columns} dataSource={roomState.data} />
     </CustomLayout>
   )

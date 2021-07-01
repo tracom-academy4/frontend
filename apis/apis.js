@@ -50,22 +50,22 @@ async function getRooms() {
 }
 
 //POST ROOMS ... -> frontend(createRoom)
-async function postRooms(room_id, capacity, phone_conference_description, room_name, tv_description, white_board_description) {
+async function postRooms(roomId, capacity, phoneConferenceDescription, roomName, tvDescription, whiteBoardDescription) {
     var axios = require('axios');
     var data = JSON.stringify({
-        "room_id": room_id,
+        "roomId": roomId,
         "capacity": capacity,
-        "phone_conference_description": phone_conference_description,
-        "room_name": room_name,
-        "tv_description": tv_description,
-        "white_board_description": white_board_description
+        "room_name": roomName,
+        "tvDescription": tvDescription,
+        "whiteBoardDescription": whiteBoardDescription,
+        "phone_conference_description": phoneConferenceDescription,
     });
 
     var config = {
         method: 'post',
         url: baseUrl + '/api/createboardroommeetings',
         headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNDMwNzkyNywiaWF0IjoxNjI0MjcxOTI3fQ.hZ7VJEQEfDvbfOWETw3edxhteFn_wGCg152xz9lsCZ4',
+            'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
         },
         data: data
@@ -82,22 +82,22 @@ async function postRooms(room_id, capacity, phone_conference_description, room_n
 }
 
 //PUT  ... -> frontend(roomManage)
-async function updateRooms(room_id, capacity, phone_conference_description, room_name, tv_description, white_board_description){
+async function updateRooms(roomId, capacity, phoneConferenceDescription, roomName, tvDescription, whiteBoardDescription){
     var axios = require('axios');
     var data = JSON.stringify({
-        "room_id": room_id,
+        "roomId": roomId,
         "capacity": capacity,
-        "phone_conference_description": phone_conference_description,
-        "room_name": room_name,
-        "tv_description": tv_description,
-        "white_board_description": white_board_description
+        "room_name": roomName,
+        "tvDescription": tvDescription,
+        "whiteBoardDescription": whiteBoardDescription,
+        "phone_conference_description": phoneConferenceDescription,
     });
 
     var config = {
         method: 'put',
         url: baseUrl + '/api/room',
         headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNDY1MDE5NCwiaWF0IjoxNjI0NjE0MTk0fQ.M0xeYdyHNNmGDf19hah-pW9bI1VNApRKEc92zRipLfs',
+            'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
         },
         data: data
@@ -123,7 +123,7 @@ async function deleteRooms(room_id) {
         method: 'delete',
         url: baseUrl + '/api/createboardroommeetings',
         headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNDMwNzkyNywiaWF0IjoxNjI0MjcxOTI3fQ.hZ7VJEQEfDvbfOWETw3edxhteFn_wGCg152xz9lsCZ4',
+            'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
         },
         data: data
@@ -154,7 +154,7 @@ async function getUser() {
         method: 'get',
         url: baseUrl + '/api/user/{userid}',
         headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNDM4OTc4NCwiaWF0IjoxNjI0MzUzNzg0fQ.578odMhDPsLqVZolhU67FznkycPyI5rDbzUpm3A3QGg',
+            'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
         },
         data: data
@@ -178,7 +178,7 @@ async function getAllUser() {
         method: 'get',
         url: baseUrl + '/api/user',
         headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNDM4OTc4NCwiaWF0IjoxNjI0MzUzNzg0fQ.578odMhDPsLqVZolhU67FznkycPyI5rDbzUpm3A3QGg',
+            'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
         },
         data: data
@@ -194,7 +194,7 @@ async function getAllUser() {
 }
 
 //POST NEW USER
-async function newUser(firstName, secondName, email, telephone, organization, role, password, confirmPassword) {
+async function newUserCreate(firstmeNa, secondName, email, telephone, organization, role, password, confirmPassword) {
 
     var data = JSON.stringify({
         "First Name": firstName,
@@ -210,6 +210,7 @@ async function newUser(firstName, secondName, email, telephone, organization, ro
 
     var config = {
         method: 'post',
+        //
         url: baseUrl + '/?',
         headers: {
             'Content-Type': 'application/json'
@@ -238,7 +239,7 @@ async function getBoardRoomMeeting() {
         method: 'get',
         url: baseUrl + '/api/event/{eventid}',
         headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNDM5MDYxMywiaWF0IjoxNjI0MzU0NjEzfQ.Q7HpXJv5FU7hvRY3pmUQlcJGHg6ySfBzFZsuXvj7mIg',
+            'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
         },
         data: data
@@ -264,7 +265,7 @@ async function getAllEvents() {
         method: 'get',
         url: baseUrl + '/api/events',
         headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNDM5MDYxMywiaWF0IjoxNjI0MzU0NjEzfQ.Q7HpXJv5FU7hvRY3pmUQlcJGHg6ySfBzFZsuXvj7mIg'
+            'Authorization': 'Bearer ' + token,
         },
         data: data
     };
@@ -295,7 +296,7 @@ async function postEvent(event_id, meeting_end_date, meeting_start_date, capacit
         method: 'post',
         url: baseUrl + '/api/createevent',
         headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNDM5MDYxMywiaWF0IjoxNjI0MzU0NjEzfQ.Q7HpXJv5FU7hvRY3pmUQlcJGHg6ySfBzFZsuXvj7mIg',
+            'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
         },
         data: data
@@ -328,7 +329,7 @@ async function putEvent(event_id, meeting_end_date, meeting_start_date, capacity
         method: 'put',
         url: baseUrl + '/api/eventt',
         headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNDM5MDYxMywiaWF0IjoxNjI0MzU0NjEzfQ.Q7HpXJv5FU7hvRY3pmUQlcJGHg6ySfBzFZsuXvj7mIg',
+            'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
         },
         data: data
@@ -353,7 +354,7 @@ async function delEvents(event_id) {
         method: 'delete',
         url: baseUrl + '/api/deleteevent',
         headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNDM5Mjc1OSwiaWF0IjoxNjI0MzU2NzU5fQ.Uvv17_Sw_fySBpbZRgvBVnxUhdriSmBXF2S8A8R-WHw'
+            'Authorization': 'Bearer ' + token,
         },
         data: data
     };
@@ -389,7 +390,7 @@ async function getCompany() {
         method: 'get',
         url: baseUrl + '/?',
         headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNDMwNzkyNywiaWF0IjoxNjI0MjcxOTI3fQ.hZ7VJEQEfDvbfOWETw3edxhteFn_wGCg152xz9lsCZ4',
+            'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
         },
         data: data
@@ -416,7 +417,7 @@ async function postCompany(company_id, company_name) {
         method: 'post',
         url: baseUrl + '/?',
         headers: {
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTYyNDMwNzkyNywiaWF0IjoxNjI0MjcxOTI3fQ.hZ7VJEQEfDvbfOWETw3edxhteFn_wGCg152xz9lsCZ4',
+            'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'
         },
         data: data
@@ -433,10 +434,11 @@ async function postCompany(company_id, company_name) {
 
 module.exports = {
     onLogin,
+    getAllUser,
     getRooms,
     postRooms,
     updateRooms,
-    newUser,
+    newUserCreate,
     getAllEvents,
     getBoardRoomMeeting,
     postEvent,

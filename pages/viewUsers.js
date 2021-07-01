@@ -1,76 +1,81 @@
-import React from 'react'
-import Link from 'next/link'
-import { Table, Tag, Space } from 'antd';
+import React, { useEffect } from 'react'
+import { Table, Space } from 'antd';
 import CustomLayout from '../components/layout';
+import { makeAutoObservable } from "mobx"
+import { observer } from "mobx-react"
 
-const { Column, ColumnGroup } = Table;
+import { getAllUser } from '../apis/apis';
 
-const data = [
+const columns = [
     {
-        key: '1',
-        firstName: 'Tracom',
-        lastName: 'Tracom',
-        email: '@tracom.co.ke',
-        Organization: 'Tracom',
+        title: 'FirstName',
+        dataIndex: 'firstName',
+        key: 'firstName',
+        render: text => <a>{text}</a>,
     },
     {
-        key: '2',
-        firstName: '',
-        lastName: '',
-        email: '',
-        Organization: '',
+        title: 'SecondName',
+        dataIndex: 'secondName',
+        key: 'secondName',
     },
     {
-        key: '3',
-        firstName: '',
-        lastName: '',
-        email: '',
-        Organization: '',
+        title: 'email',
+        dataIndex: 'email',
+        key: 'email',
+    },
+    {
+        title: 'telephone',
+        key: 'telephone',
+        dataIndex: 'telephone',
+
+    },
+    {
+        title: 'organization',
+        key: 'organization',
+        dataIndex: 'organization',
+    },
+    {
+        title: 'Action',
+        key: 'action',
+        render: (text, record) => (
+            <Space size="middle">
+                <a>Invite {record.name}</a>
+                <a>Delete</a>
+            </Space>
+        ),
     },
 ];
 
-export default function viewUsers() {
+
+
+class UsersState {
+    isLoading = false;
+    data = []
+    constructor() {
+        makeAutoObservable(this)
+    }
+
+    getAllUser = async () => {
+        this.isLoading = true;
+        this.data = await getAllUser()
+        this.isLoading = false;
+    }
+
+}
+const usersState = new UsersState();
+
+function viewUsers() {
+    useEffect(() => {
+        usersState.getAllUser()
+    }, []);
+
     return (
-        <div>
-            <CustomLayout>
-            <Table dataSource={data}>
-            <ColumnGroup title="Name">
-                <Column title="First Name" dataIndex="firstName" key="firstName" />
-                <Column title="Last Name" dataIndex="lastName" key="lastName" />
-            </ColumnGroup>
-            <Column title="email" dataIndex="email" key="email" />
-            <Column title="Organization" dataIndex="rganization" key="rganization" />
-            
-            {/*<Column
-                title="Tags"
-                dataIndex="tags"
-                key="tags"
-                render={tags => (
-                    <>
-                        {tags.map(tag => (
-                            <Tag color="blue" key={tag}>
-                                {tag}
-                            </Tag>
-                        ))}
-                    </>
-                )}
-            />
-            */}
+        <CustomLayout>
 
-            <Column
-                title="Action"
-                key="action"
-                render={(text, record) => (
-                    <Space size="middle">
-                        <a>Invite {record.lastName}</a>
-                        <a>Delete</a>
-                    </Space>
-                )}
-            />
-            </Table>
+            <Table columns={columns} dataSource={usersState.data} />
 
+        </CustomLayout>
 
-            </CustomLayout>
-        </div>       
     )
 }
+export default observer(viewUsers)
